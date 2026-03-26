@@ -1,5 +1,7 @@
 # 🚀 Concurrent Task Queue in Go
 
+![CI](https://github.com/Bevilh2o/go-task-queue/actions/workflows/go.yml/badge.svg)
+
 A high-performance concurrent task queue built in Go, featuring worker pools, retry logic, and graceful shutdown.
 
 ---
