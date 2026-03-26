@@ -7,6 +7,7 @@ import (
 	"time"
 	"task-queue/internal/job"
 	"task-queue/internal/worker"
+	"task-queue/internal/processor"
 )
 
 func main() {
