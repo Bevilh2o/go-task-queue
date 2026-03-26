@@ -23,6 +23,7 @@ It simulates a distributed workload where multiple workers process jobs with ret
 - 🧠 Deterministic behavior under concurrency
 - 🛑 Graceful shutdown (no job loss, no goroutine leaks)
 - 📊 Performance benchmarking (jobs/sec)
+- 🔌 Decoupled processing logic via dependency injection
 
 ---
 
@@ -68,27 +69,21 @@ The system ensures:
 
 ## 📊 Benchmark
 
-### 1 Worker
+Run:
 
-```
-Workers: 1
-Jobs: 1000
-Success: 910
-Failed: 90
-Total time: 148ms
-Jobs/sec: ~6753
+```bash
+go test -bench=. -benchmem ./internal/worker
 ```
 
-### 8 Workers
+Example result:
 
 ```
-Workers: 8
-Jobs: 1000
-Success: 910
-Failed: 90
-Total time: 76ms
-Jobs/sec: ~13094
+BenchmarkWorkerPool-8   	     148	   8269285 ns/op	   39598 B/op	     765 allocs/op
 ```
+
+### Throughput
+
+- ~120,000 jobs/sec (8 workers, lightweight processing)
 
 ---
 
@@ -119,6 +114,7 @@ go run cmd/app/main.go -workers=4 -jobs=100
 
 - Go concurrency (goroutines + channels)  
 - Worker pool pattern  
+- Dependency injection (decoupled processing logic)  
 - Fault tolerance via retries  
 - Synchronization and coordination  
 - Performance measurement  
