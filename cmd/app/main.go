@@ -24,7 +24,7 @@ func main() {
 
 	start := time.Now()
 
-	worker.StartWorkerPool(*numWorkers, jobs, &wg, &successCount, &failedCount)
+	worker.StartWorkerPool(*numWorkers, jobs, &wg, &successCount, &failedCount, processor.Process)
 
 	// Produce jobs
 	for i := 0; i < *numJobs; i++ {

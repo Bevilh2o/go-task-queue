@@ -5,7 +5,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"task-queue/internal/job"
-	"task-queue/internal/processor"
 )
 
 func StartWorkerPool(
@@ -14,12 +13,13 @@ func StartWorkerPool(
 	wg *sync.WaitGroup,
 	successCount *int64,
 	failedCount *int64,
+	processFunc func(string) error,
 ) {
 	for i := 0; i < numWorkers; i++ {
 		go func(workerID int) {
 			for j := range jobs {
 
-				err := processor.Process(j.Payload)
+				err := processFunc(j.Payload)
 
 				if err != nil {
 					if j.Retries < 3 {
